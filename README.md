@@ -1,23 +1,26 @@
 # Thinking Tools
 
-A self-improving system of 7 AI skills that chain together to solve hard problems. Built for [Claude Code](https://claude.ai/claude-code), works with any LLM that supports custom instructions.
+**7 AI skills that chain together, evaluate each other, and improve themselves.**
 
-**Not a prompt collection.** This is a thinking *system* where skills route to each other, evaluate each other's output, and improve themselves.
+Built for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Works with any LLM that supports custom instructions.
 
-## The System
+Not a prompt collection. This is a thinking **system** with routing, quality gates, and a self-improvement loop.
 
 ```
-                    /think (router)
-                       |
-         +------+------+------+------+
-         |      |      |      |      |
-      /derive /xray /stress  /otb  /flip
-         |      |    -test    |      |
-         +------+------+------+------+
-                       |
-                    /taste
-                  (evaluates
-                  everything)
+         Input: any hard problem
+                    |
+               /think (router)
+                    |
+      +------+------+------+------+
+      |      |      |      |      |
+   /derive /xray /stress  /otb  /flip
+      |      |    -test    |      |
+      +------+------+------+------+
+                    |
+               /taste (scores output 1-10)
+                    |
+          Score < 8? Loop back.
+          Score 8+? Ship it.
 ```
 
 | Skill | What It Does | When to Use It |
@@ -42,38 +45,28 @@ A self-improving system of 7 AI skills that chain together to solve hard problem
 
 **5. No fake confidence.** `/taste` exists specifically to catch AI output that sounds impressive but isn't. `/derive` forces a divergence score (how different is this from what anyone would say?). `/stress-test` runs an empirical spot-check against real data. The system is designed to catch its own bullshit.
 
-## Quick Start
+## Install (30 seconds)
 
-### Claude Code (recommended)
-
-Copy the skills into your Claude Code commands directory:
+### Claude Code
 
 ```bash
-# Clone the repo
 git clone https://github.com/andrew-shwetzer/thinking-tools.git
-
-# Copy skills to Claude Code commands
 cp thinking-tools/skills/*.md ~/.claude/commands/
 ```
 
-Then use them in any Claude Code session:
+That's it. Now use them:
 
 ```
-> /think should I build a SaaS or keep doing consulting?
-> /derive how should I price my API product?
-> /otb get more enterprise clients for my dev tool
-> /stress-test ~/my-project/plan.md
-> /taste (evaluates the last output)
+/think should I build a SaaS or keep doing consulting?
+/derive how should I price my API product?
+/otb get more enterprise clients for my dev tool
+/stress-test ~/my-project/plan.md
+/taste                                              # scores the last output
 ```
 
-### Other LLMs
+### Any other LLM
 
-The skills are markdown files with structured instructions. You can:
-- Paste the content as a system prompt
-- Use them as custom instructions in any chat interface
-- Adapt them for other AI coding tools
-
-The `$ARGUMENTS` placeholder gets replaced with your input.
+These are markdown files. Paste the content as a system prompt, use as custom instructions, or adapt for your tool of choice. The `$ARGUMENTS` placeholder gets replaced with your input.
 
 ## Example: The Self-Improvement Loop
 
@@ -153,10 +146,27 @@ Common customizations:
 4. **Specific over general.** "Focus on your ICP" scores a 4/10 on `/taste`. "Target VP Engineering at Series B SaaS companies using this exact LinkedIn search query" scores a 7+.
 5. **Self-critical.** The system is designed to catch its own failures through `/taste` and the falsification stages in `/derive` and `/stress-test`.
 
+## What People Use These For
+
+- **Pricing decisions** -- /derive builds the answer from unit economics, /stress-test finds where it breaks
+- **Go-to-market strategy** -- /otb finds the non-obvious move, /taste validates it's not just clever-sounding
+- **Architecture reviews** -- /xray finds hidden assumptions, leverage asymmetries, and the uncomfortable question
+- **Plan validation** -- /stress-test runs 8 adversarial lenses before you write a line of code
+- **Assumption challenging** -- /flip inverts the orthodoxy, /derive checks if the inversion holds
+- **Quality control** -- /taste catches AI output that sounds impressive but isn't actionable
+
+## Contributing
+
+Found a bug? Have a skill that chains well with these? PRs welcome.
+
+The most valuable contributions: real-world examples of skill outputs (sanitized), new canonical examples for /otb from underrepresented domains, and /taste evaluations of the skills themselves.
+
 ## License
 
-MIT. Use however you want.
+MIT
 
 ## Author
 
-Built by [Andrew Shwetzer](https://github.com/andrew-shwetzer). These tools run my businesses, evaluate my strategies, and improve themselves. They're not theoretical -- they're the system I use every day to think harder about hard problems.
+Built by [Andrew Shwetzer](https://github.com/andrew-shwetzer). These tools run my businesses, evaluate my strategies, and improve themselves. Not theoretical. This is the system I use every day to think harder about hard problems.
+
+If these tools help you make a better decision, [star the repo](https://github.com/andrew-shwetzer/thinking-tools) so others can find it.
