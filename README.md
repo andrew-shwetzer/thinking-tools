@@ -29,7 +29,7 @@ Not a prompt collection. This is a thinking **system** with routing, quality gat
 | [`/derive`](skills/derive.md) | Builds answers from first principles | Open questions, pricing decisions, strategy |
 | [`/xray`](skills/xray.md) | Deep structural analysis of systems | "Something feels wrong but I can't name it" |
 | [`/stress-test`](skills/stress-test.md) | Attacks plans from 8 angles | Before building anything, find what will break |
-| [`/otb`](skills/otb.md) | Finds the non-obvious move | Creative strategy, reframing, competitive advantage |
+| [`/otb`](skills/otb.md) | Finds the non-obvious move (7 lenses + scale break) | Creative strategy, reframing, competitive advantage |
 | [`/flip`](skills/flip.md) | Inverts assumptions to find hidden value | Challenge "the way things are done" |
 | [`/taste`](skills/taste.md) | Quality filter for any output | "Is this actually good or does it just sound good?" |
 
