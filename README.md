@@ -74,7 +74,7 @@ This actually happened. Here's the condensed version:
 
 **Step 1:** Ran `/otb` on a real business problem. Got a creative strategy output.
 
-**Step 2:** Ran `/taste` on that output. Score: **8.0/10 (GOD TIER threshold)**.
+**Step 2:** Ran `/taste` on that output. Score: **8.0/10 (Optimal threshold)**.
 - Weakest dimension: Groundedness (7/10). The output projected a "15-25% response rate" with no evidence.
 - Missing: A "Day 1" action. The output had 8 implementation steps but no "do this Monday morning" instruction.
 
